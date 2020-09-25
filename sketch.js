@@ -100,12 +100,21 @@ window.setup = setup;
 // * Whatever draw method implented by selected DistanceMetric
 function draw() {
   background(255);
+
+  // Draw canvas border
+  stroke(0, 50);
+  strokeWeight(1);
+  line(0, 0, width, 0);
+  line(0, height, width, height);
+  line(0, 0, 0, height);
+  line(width, 0, width, height);
+
+  // Make (0, 0) in center of canvas
   translate(width / 2, height / 2);
 
+  // Draw axes with origin in middle
   stroke(0);
   strokeWeight(2);
-
-  // Draw axes with origin in middle
   line(-width / 2, 0, width / 2, 0);
   line(0, -height / 2, 0, height / 2);
 
