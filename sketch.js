@@ -1,15 +1,18 @@
 import EuclideanDistance from './distances/euclidean_dist.js';
 import ManhattanDistance from './distances/manhattan_dist.js';
+import ChebyshevDistance from './distances/chebyshev_dist.js';
 
 // To add a new distance metric add a line adding it to the window object
 // Add the metric object to distance_metric_objs
 // Prolly a better way to do this
 window.EuclideanDistance = EuclideanDistance;
 window.ManhattanDistance = ManhattanDistance;
+window.ChebyshevDistance = ChebyshevDistance;
 
 const distance_metric_objs = [
   EuclideanDistance,
   ManhattanDistance,
+  ChebyshevDistance,
 ];
 
 // canvas dimensions
