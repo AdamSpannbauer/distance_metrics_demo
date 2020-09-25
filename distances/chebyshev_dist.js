@@ -45,14 +45,14 @@ class ChebyshevDistance extends DistanceMetric {
       super.mid_point_text(
         createVector(p1.x, p1.y),
         createVector(p2.x, p1.y),
-        d.toFixed(3),
+        d.toFixed(1),
         l_stroke,
       );
     } else {
       super.mid_point_text(
         createVector(p1.x, p1.y),
         createVector(p1.x, p2.y),
-        d.toFixed(3),
+        d.toFixed(1),
         l_stroke,
       );
     }
