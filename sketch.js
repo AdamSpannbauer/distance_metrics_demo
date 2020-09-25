@@ -1,4 +1,4 @@
-import DistanceMetric from './distance_metric.js';
+import DistanceMetric from './distances/distance_metric.js';
 
 const canvas_w = 640;
 const canvas_h = 480;
@@ -8,34 +8,45 @@ let y = null;
 let z = null;
 let distance_metric = null;
 
-function setup() {
-  createCanvas(canvas_w, canvas_h);
+function mouseXY() {
+  const x = constrain(mouseX - width / 2, -width / 2, width / 2);
+  const y = constrain(mouseY - height / 2, -height / 2, height / 2);
+
+  return createVector(x, y);
 }
 
 function mouseClicked() {
-  x = createVector(mouseX - width / 2, mouseY - height / 2);
+  x = mouseXY();
 }
+window.mouseClicked = mouseClicked;
 
 function keyPressed() {
   if (keyCode === ENTER) {
-    z = createVector(mouseX - width / 2, mouseY - height / 2);
+    z = mouseXY();
   } else if (keyCode === ESCAPE) {
     z = null;
   }
 }
+window.keyPressed = keyPressed;
+
+function setup() {
+  createCanvas(canvas_w, canvas_h);
+}
+window.setup = setup;
 
 function draw() {
   background(0);
   translate(width / 2, height / 2);
 
-  // Draw axes with origin in middle
   stroke(255);
   strokeWeight(2);
+
+  // Draw axes with origin in middle
   line(-width / 2, 0, width / 2, 0);
   line(0, -height / 2, 0, height / 2);
 
   // Set y location based on mouse
-  y = createVector(mouseX - width / 2, mouseY - height / 2);
+  y = mouseXY();
 
   // Create dist metric if both x and y exist
   if (x && y && !distance_metric) {
@@ -48,9 +59,6 @@ function draw() {
     distance_metric.draw();
   }
 }
-
-window.mouseClicked = mouseClicked;
-window.setup = setup;
 window.draw = draw;
 
 // function mid_point_text(p1, p2, t) {
