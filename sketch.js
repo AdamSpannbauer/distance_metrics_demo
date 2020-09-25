@@ -22,7 +22,6 @@ function setup() {
   sel.changed(set_dist_calc);
 }
 
-
 function draw() {
   clear();
   background(0);
@@ -80,7 +79,6 @@ function draw() {
     text(`${dxy.toFixed(0)} <= ${(dxz + dyz).toFixed(0)}`, 20, 340);
   }
 }
-
 
 function mouseClicked() {
   x = createVector(mouseX, mouseY);
@@ -169,7 +167,6 @@ function manhattan_distance(p1, p2, name, text_y) {
 
   return (return_dist);
 }
-
 
 function chebyshev_distance(p1, p2, name, text_y) {
   const dist_x = abs(p1.x - p2.x);
