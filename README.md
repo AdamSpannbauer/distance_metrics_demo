@@ -1,16 +1,19 @@
 # Distance Metrics
 
-Small demo app to comapre some distance metrics.  App is live at [https://adamspannbauer.github.io/distance_metrics_demo/](https://adamspannbauer.github.io/distance_metrics_demo/)
+Small demo app to compare some distance metrics.  App is live at [https://adamspannbauer.github.io/distance_metrics_demo/](https://adamspannbauer.github.io/distance_metrics_demo/)
 
-<p align='center'>
-  <img src='readme/demo.gif' width='75%'>
-</p>
+## To add a `DistanceMetric`
 
 
-## Disclaimer
+### Steps:
 
-This is a quick and dirty app.  If you're here to learn.  Don't do it by reviewing my code (unless its to point out whats wrong and open a PR to make it better).
+1. Copy `distances/distance_metric_subclass_template.js` and paste your file into the `distances` dir with an appropriate name for the metric you plan to add
+2. Complete all the `TODO` items in the template
+3. `import` the new metric in `sketch.js`
+4. Add your distance metric to the `window` object in `sketch.js`
+5. Add your distance metric to the `distance_metric_objs` array in `sketch.js`
 
-## Contributing
 
-If you'd like to add a distance metric be my guest!  I'll happily review and accept any PRs that will add some value.  See disclaimer section before considering contributing.
+### Example:
+
+* See `distances/euclidean_dist.js` and how the metric is imported in `sketch.js`
