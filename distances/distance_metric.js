@@ -57,7 +57,7 @@ class DistanceMetric {
 
   mid_point_text(p1, p2, t, c) {
     const mip_point = createVector((p2.x - p1.x) / 2, (p2.y - p1.y) / 2);
-    
+
     push();
     c.setAlpha(255);
     fill(c);
