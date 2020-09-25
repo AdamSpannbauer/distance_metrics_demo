@@ -1,10 +1,16 @@
 import EuclideanDistance from './distances/euclidean_dist.js';
+import ManhattanDistance from './distances/manhattan_dist.js';
 
 // To add a new distance metric add a line adding it to the window object
 // Add the metric object to distance_metric_objs
 // Prolly a better way to do this
 window.EuclideanDistance = EuclideanDistance;
-const distance_metric_objs = [EuclideanDistance];
+window.ManhattanDistance = ManhattanDistance;
+
+const distance_metric_objs = [
+  EuclideanDistance,
+  ManhattanDistance,
+];
 
 // canvas dimensions
 const canvas_w = 640;
@@ -86,10 +92,10 @@ window.setup = setup;
 // * Axes
 // * Whatever draw method implented by selected DistanceMetric
 function draw() {
-  background(0);
+  background(255);
   translate(width / 2, height / 2);
 
-  stroke(255);
+  stroke(0);
   strokeWeight(2);
 
   // Draw axes with origin in middle
