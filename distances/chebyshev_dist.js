@@ -27,6 +27,13 @@ class ChebyshevDistance extends DistanceMetric {
     const dy = abs(p1.y - p2.y);
     
     push();
+    stroke(l_stroke)
+    if (dx >= dy) {
+      line(p1.x, p1.y, p2.x, p1.y);
+    } else {
+      line(p1.x, p1.y, p1.x, p2.y);
+    }
+
     noStroke();
     fill(p1_fill);
     ellipse(p1.x, p1.y, 10, 10);
@@ -34,9 +41,7 @@ class ChebyshevDistance extends DistanceMetric {
     fill(p2_fill);
     ellipse(p2.x, p2.y, 10, 10);
 
-    stroke(l_stroke)
     if (dx >= dy) {
-      line(p1.x, p1.y, p2.x, p1.y);
       super.mid_point_text(
         createVector(p1.x, p1.y),
         createVector(p2.x, p1.y),
@@ -44,7 +49,6 @@ class ChebyshevDistance extends DistanceMetric {
         l_stroke,
       );
     } else {
-      line(p1.x, p1.y, p1.x, p2.y);
       super.mid_point_text(
         createVector(p1.x, p1.y),
         createVector(p1.x, p2.y),

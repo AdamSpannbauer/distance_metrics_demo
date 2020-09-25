@@ -43,7 +43,9 @@ function mouseXY() {
 
 // Set p2 to mouse location when user clicks
 function mouseClicked() {
-  p2 = mouseXY();
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    p2 = mouseXY();
+  }
 }
 window.mouseClicked = mouseClicked;
 
@@ -51,7 +53,9 @@ window.mouseClicked = mouseClicked;
 // Set p3 to null when user presses ESCAPE
 function keyPressed() {
   if (keyCode === ENTER) {
-    p3 = mouseXY();
+    if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+      p3 = mouseXY();
+    }
   } else if (keyCode === ESCAPE) {
     p3 = null;
   }
