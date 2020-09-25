@@ -2,6 +2,10 @@
 
 Small demo app to compare some distance metrics.  App is live at [https://adamspannbauer.github.io/distance_metrics_demo/](https://adamspannbauer.github.io/distance_metrics_demo/)
 
+<p align='center'>
+ <img src='readme/demo.gif' width=50%>
+</p>
+
 ## To add a `DistanceMetric`
 
 
