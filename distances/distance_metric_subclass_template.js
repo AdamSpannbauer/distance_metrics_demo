@@ -12,16 +12,30 @@ class MyDistanceMetric extends DistanceMetric {
     return dist(p1.x, p1.y, p2.x, p2.y);
  	}
 
-  draw_pair (p1, p2, d) {
+  draw_pair (p1, p2, d, p1_fill, p2_fill, l_stroke) {
     // TODO: implement code to draw a pair of points/vectors
     // given 2 2d vectors (each with x & y properties)
 
     // example drawing 2 points
-    ellipse(p1.x, p1.y, 6, 6);
-    ellipse(p2.x, p2.y, 6, 6);
+    push();
+    // transparency in case of overlapping lines
+    l_stroke.setAlpha(150);
+    // line color
+    stroke(l_stroke);
+    // draw line between pts
+    line(p1.x, p1.y, p2.x, p2.y);
 
-    // place text showing distance at midploint
-    super.mid_point_text(p1, p2, d.toFixed(3));
+    // no outline for points and use given color for each
+    noStroke();
+    fill(p1_fill);
+    ellipse(p1.x, p1.y, 10, 10);
+
+    fill(p2_fill);
+    ellipse(p2.x, p2.y, 10, 10);
+
+    // place text showing distance at midploint of line
+    super.mid_point_text(p1, p2, d.toFixed(1), l_stroke);
+    pop();
   }
 }
 
