@@ -11,6 +11,18 @@ class DistanceMetric {
   #p1 = createVector();
   #p2 = createVector();
   #p3 = createVector();
+
+  // Using plotly color palette:
+  // import plotly.express as px
+  // print(px.colors.qualitative.Plotly[:6])
+  #p1_fill = color('#636EFA');
+  #p2_fill = color('#EF553B');
+  #p3_fill = color('#00CC96');
+
+  #l1_stroke = color('#AB63FA');
+  #l2_stroke = color('#FFA15A');
+  #l3_stroke = color('#19D3F3');
+
   use_p3 = false;
 
   d12 = 0;
@@ -39,22 +51,20 @@ class DistanceMetric {
     // Subclasses need to implement
   }
 
-  draw_pair (p1, p2, d) {
+  draw_pair(p1, p2, d, p1_fill, p2_fill, l_stroke) {
     // Subclasses need to implement
   }
 
-  mid_point_text (p1, p2, t) {
+  mid_point_text(p1, p2, t, c) {
     const mip_point = createVector((p2.x - p1.x) / 2, (p2.y - p1.y) / 2);
-
+    
     push();
-
+    c.setAlpha(255);
+    fill(c);
     strokeWeight(0.5);
-    stroke(250);
-    fill(250);
 
     translate(p1);
     text(t, mip_point.x + 10, mip_point.y + 20);
-
     pop();
   }
 
@@ -63,12 +73,12 @@ class DistanceMetric {
     // Assume center of canvas is at location (0, 0)
 
     // Always draw p1 <-> p2
-    this.draw_pair(this.#p1, this.#p2, this.d12);
+    this.draw_pair(this.#p1, this.#p2, this.d12, this.#p1_fill, this.#p2_fill, this.#l1_stroke);
 
     // Optionally draw p3 relationships
     if (this.use_p3) {
-      this.draw_pair(this.#p1, this.#p3, this.d13);
-      this.draw_pair(this.#p2, this.#p3, this.d23);
+      this.draw_pair(this.#p1, this.#p3, this.d13, this.#p1_fill, this.#p3_fill, this.#l2_stroke);
+      this.draw_pair(this.#p2, this.#p3, this.d23, this.#p2_fill, this.#p3_fill, this.#l3_stroke);
     }
     pop();
   }
