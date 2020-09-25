@@ -6,7 +6,7 @@ class DistanceMetric {
   /*eslint-disable */
   // eslint was making it be really vertically spaced out
   // i didnt like it
-  name = 'Distance Metric Base Class';
+  static dist_name = 'Distance Metric Base Class';
   
   #p1 = createVector();
   #p2 = createVector();
@@ -35,20 +35,15 @@ class DistanceMetric {
     }
   }
 
-  distance() {
-    // TODO: implement distance calc here
-    return dist(this.#p1.x, this.#p1.y, this.#p2.x, this.#p2.y);
+  distance(p1, p2) {
+    // Subclasses need to implement
   }
 
-  #draw_pair (p1, p2, d) {
-    // TODO: implement code to draw a pair of points/vectors
-    // given 2 x, y vectors and a distance
-    ellipse(p1.x, p1.y, 6, 6);
-    ellipse(p2.x, p2.y, 6, 6);
-    this.#mid_point_text(p1, p2, d.toFixed(3))
+  draw_pair (p1, p2, d) {
+    // Subclasses need to implement
   }
 
-  #mid_point_text (p1, p2, t) {
+  mid_point_text (p1, p2, t) {
     const mip_point = createVector((p2.x - p1.x) / 2, (p2.y - p1.y) / 2);
 
     push();
@@ -68,12 +63,12 @@ class DistanceMetric {
     // Assume center of canvas is at location (0, 0)
 
     // Always draw p1 <-> p2
-    this.#draw_pair(this.#p1, this.#p2, this.d12);
+    this.draw_pair(this.#p1, this.#p2, this.d12);
 
     // Optionally draw p3 relationships
     if (this.use_p3) {
-      this.#draw_pair(this.#p1, this.#p3, this.d13);
-      this.#draw_pair(this.#p2, this.#p3, this.d23);
+      this.draw_pair(this.#p1, this.#p3, this.d13);
+      this.draw_pair(this.#p2, this.#p3, this.d23);
     }
     pop();
   }
