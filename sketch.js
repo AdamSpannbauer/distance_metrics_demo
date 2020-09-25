@@ -3,10 +3,10 @@ import DistanceMetric from './distances/distance_metric.js';
 const canvas_w = 640;
 const canvas_h = 480;
 
-let x = null;
-let y = null;
-let z = null;
-let distance_metric = null;
+let p1 = null;
+let p2 = null;
+let p3 = null;
+let distance_metric;
 
 function mouseXY() {
   const x = constrain(mouseX - width / 2, -width / 2, width / 2);
@@ -16,21 +16,22 @@ function mouseXY() {
 }
 
 function mouseClicked() {
-  x = mouseXY();
+  p2 = mouseXY();
 }
 window.mouseClicked = mouseClicked;
 
 function keyPressed() {
   if (keyCode === ENTER) {
-    z = mouseXY();
+    p3 = mouseXY();
   } else if (keyCode === ESCAPE) {
-    z = null;
+    p3 = null;
   }
 }
 window.keyPressed = keyPressed;
 
 function setup() {
   createCanvas(canvas_w, canvas_h);
+  distance_metric = new DistanceMetric();
 }
 window.setup = setup;
 
@@ -46,32 +47,21 @@ function draw() {
   line(0, -height / 2, 0, height / 2);
 
   // Set y location based on mouse
-  y = mouseXY();
+  // x is set by mouseClicked()
+  // z is set by keyPressed()
+  p1 = mouseXY();
+  distance_metric.p1 = p1;
 
-  // Create dist metric if both x and y exist
-  if (x && y && !distance_metric) {
-    distance_metric = new DistanceMetric(x, y);
-  }
+  if (p2) {
+    // null p3 is handled inside DistanceMetric
+    distance_metric.p2 = p2;
+    distance_metric.p3 = p3;
 
-  // Update y location and draw if dist metric exists
-  if (distance_metric) {
-    distance_metric.p2 = y;
     distance_metric.draw();
   }
 }
 window.draw = draw;
 
-// function mid_point_text(p1, p2, t) {
-//   const mp = createVector((p2.x - p1.x) / 2, (p2.y - p1.y) / 2);
-
-//   push();
-//   strokeWeight(0.5);
-//   stroke(250);
-//   fill(250);
-//   translate(p1);
-//   text(t, mp.x + 10, mp.y + 20);
-//   pop();
-// }
 //
 // function manhattan_distance(p1, p2, name, text_y) {
 //   const dist_x = abs(p1.x - p2.x);
