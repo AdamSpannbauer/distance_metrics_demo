@@ -128,15 +128,31 @@ class DistanceMetric {
     const x = -width / 2 + 2;
     let y = -height / 2 + buffer;
 
+    let r1 = Object.values(this.#p1);
+    let r2 = Object.values(this.#p2);
+    let dot = 0;
+    let m1 = 0;
+    let m2 = 0;
+    for(let i=1; i<r1.length; i++){
+      dot += (r1[i] * r2[i]);
+      m1 += (r1[i]**2)
+      m2 += (r2[i]**2);
+    }
+    m1 = Math.sqrt(m1);
+    m2 = Math.sqrt(m2);
+
     const euclid = dist(this.#p1.x, this.#p1.y, this.#p2.x, this.#p2.y);
     const manhattan = abs(this.#p1.x - this.#p2.x) + abs(this.#p1.y - this.#p2.y);
     const cheby = max([abs(this.#p1.x - this.#p2.x), abs(this.#p1.y - this.#p2.y)]);
+    const cosine = 1 - dot / (m1*m2);
 
     text(`Euclidean: ${euclid.toFixed(1)}`, x, y);
     y += buffer;
     text(`Manhattan: ${manhattan.toFixed(1)}`, x, y);
     y += buffer;
     text(`Chebyshev: ${cheby.toFixed(1)}`, x, y);
+    y += buffer;
+    text(`Cosine: ${cosine.toFixed(2)}`, x, y);
     y += buffer;
   }
 
