@@ -75,10 +75,12 @@ function update_dist_metric() {
 // * distance method drop down list
 // * distance metric key-value store
 function setup() {
-  createCanvas(canvas_w, canvas_h);
-
   distance_selector = createSelect();
   distance_selector.changed(update_dist_metric);
+  distance_selector.parent('#distance-selector');
+
+  const cnv = createCanvas(canvas_w, canvas_h);
+  cnv.parent('#num-distance-plot');
 
   let first_name = null;
   for (const dm of distance_metric_objs) {
@@ -92,6 +94,9 @@ function setup() {
 
   distance_selector.selected(first_name);
   update_dist_metric();
+
+  // shift canvas down by 10
+  cnv.position(cnv.position().x, cnv.position().y + 10);
 }
 window.setup = setup;
 
