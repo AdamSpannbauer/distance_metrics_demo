@@ -2,6 +2,22 @@
  * Base class for distance metrics/drawings.
  */
 
+function draw_text(text_arr, x, y) {
+  let xi = x;
+
+  for (let i = 0; i < text_arr.length; i++) {
+    const text_part = text_arr[i];
+    const t = text_part[0];
+    const c = text_part[1];
+    const w = textWidth(t);
+
+    fill(c);
+    stroke(c);
+    text(t, xi, y);
+    xi += w;
+  }
+}
+
 class DistanceMetric {
   /*eslint-disable */
   // eslint was making it be really vertically spaced out
@@ -79,8 +95,79 @@ class DistanceMetric {
     if (this.use_p3) {
       this.draw_pair(this.#p1, this.#p3, this.d13, this.#p1_fill, this.#p3_fill, this.#l2_stroke);
       this.draw_pair(this.#p2, this.#p3, this.d23, this.#p2_fill, this.#p3_fill, this.#l3_stroke);
+
+      this.triangle_inequality_text();
+    } else {
+      this.distance_comparison_text();
     }
     pop();
+  }
+
+  distance_comparison_text() {
+    strokeWeight(1);
+    stroke(0);
+    fill(0);
+
+    const buffer = 13;
+    const x = -width / 2 + 2;
+    let y = -height / 2 + buffer;
+
+    const euclid = dist(this.#p1.x, this.#p1.y, this.#p2.x, this.#p2.y);
+    const manhattan = abs(this.#p1.x - this.#p2.x) + abs(this.#p1.y - this.#p2.y);
+    const cheby = max([abs(this.#p1.x - this.#p2.x), abs(this.#p1.y - this.#p2.y)]);
+
+    text(`Euclidean: ${euclid.toFixed(1)}`, x, y);
+    y += buffer;
+    text(`Manhattan: ${manhattan.toFixed(1)}`, x, y);
+    y += buffer;
+    text(`Chebyshev: ${cheby.toFixed(1)}`, x, y);
+    y += buffer;
+  }
+
+  triangle_inequality_text() {
+    strokeWeight(1);
+    stroke(0);
+    fill(0);
+
+    const buffer = 13;
+    const x = -width / 2 + 2;
+    let y = -height / 2 + buffer;
+    let text_arr;
+
+    text('Triangle inequality:', x, y);
+    y += buffer;
+
+    text_arr = [
+      [`${this.d12.toFixed(1)}`, this.#l1_stroke],
+      [' + ', (0, 0, 0)],
+      [`${this.d13.toFixed(1)}`, this.#l2_stroke],
+      [` = ${(this.d12 + this.d13).toFixed(1)}`, (0, 0, 0)],
+      [' >= ', (0, 0, 0)],
+      [`${this.d23.toFixed(1)}`, this.#l3_stroke],
+    ];
+    draw_text(text_arr, x, y);
+    y += buffer;
+
+    text_arr = [
+      [`${this.d12.toFixed(1)}`, this.#l1_stroke],
+      [' + ', (0, 0, 0)],
+      [`${this.d23.toFixed(1)}`, this.#l3_stroke],
+      [` = ${(this.d12 + this.d23).toFixed(1)}`, (0, 0, 0)],
+      [' >= ', (0, 0, 0)],
+      [`${this.d12.toFixed(1)}`, this.#l2_stroke],
+    ];
+    draw_text(text_arr, x, y);
+    y += buffer;
+
+    text_arr = [
+      [`${this.d13.toFixed(1)}`, this.#l2_stroke],
+      [' + ', (0, 0, 0)],
+      [`${this.d23.toFixed(1)}`, this.#l3_stroke],
+      [` = ${(this.d13 + this.d23).toFixed(1)}`, (0, 0, 0)],
+      [' >= ', (0, 0, 0)],
+      [`${this.d23.toFixed(1)}`, this.#l1_stroke],
+    ];
+    draw_text(text_arr, x, y);
   }
 
   // getters/setters for p1, p2, & p3
