@@ -99,7 +99,23 @@ class DistanceMetric {
       this.triangle_inequality_text();
     } else {
       this.distance_comparison_text();
+      this.p1_p2_coords_text();
     }
+    pop();
+  }
+
+  p1_p2_coords_text() {
+    push();
+    textSize(9);
+    strokeWeight(1);
+
+    stroke(this.#p1_fill);
+    fill(this.#p1_fill);
+    text(`(${this.#p1.x.toFixed(1)}, ${this.#p1.y.toFixed(1)})`, this.#p1.x + 5, this.#p1.y + 5);
+    
+    stroke(this.#p2_fill);
+    fill(this.#p2_fill);
+    text(`(${this.#p2.x.toFixed(1)}, ${this.#p2.y.toFixed(1)})`, this.#p2.x + 5, this.#p2.y + 5);
     pop();
   }
 
