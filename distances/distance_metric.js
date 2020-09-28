@@ -111,11 +111,11 @@ class DistanceMetric {
 
     stroke(this.#p1_fill);
     fill(this.#p1_fill);
-    text(`(${this.#p1.x.toFixed(1)}, ${this.#p1.y.toFixed(1)})`, this.#p1.x + 5, this.#p1.y + 5);
+    text(`(${this.#p1.x.toFixed(1)}, ${-1 * this.#p1.y.toFixed(1)})`, this.#p1.x + 5, this.#p1.y + 5);
     
     stroke(this.#p2_fill);
     fill(this.#p2_fill);
-    text(`(${this.#p2.x.toFixed(1)}, ${this.#p2.y.toFixed(1)})`, this.#p2.x + 5, this.#p2.y + 5);
+    text(`(${this.#p2.x.toFixed(1)}, ${-1 * this.#p2.y.toFixed(1)})`, this.#p2.x + 5, this.#p2.y + 5);
     pop();
   }
 
