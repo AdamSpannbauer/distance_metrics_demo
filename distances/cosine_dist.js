@@ -64,7 +64,8 @@ class CosineDistance extends DistanceMetric {
           end = p1.heading();
         }
     }
-
+    
+    noFill();
     arc(0, 0, 50, 50, start, end);
 
     // no outline for points and use given color for each
