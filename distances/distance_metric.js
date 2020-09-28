@@ -152,7 +152,7 @@ class DistanceMetric {
     y += buffer;
     text(`Chebyshev: ${cheby.toFixed(1)}`, x, y);
     y += buffer;
-    text(`Cosine: ${cosine.toFixed(2)}`, x, y);
+    text(`1 - Cosine Similarity: ${cosine.toFixed(2)}`, x, y);
     y += buffer;
   }
 
