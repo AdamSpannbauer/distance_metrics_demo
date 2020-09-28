@@ -1,7 +1,7 @@
 import DistanceMetric from './distance_metric.js';
 
 class CosineDistance extends DistanceMetric {
-  static dist_name = 'Cosine';
+  static dist_name = '1 - Cosine Similarity';
 
   distance(p1, p2) {
     p1 = Object.values(p1);
