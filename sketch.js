@@ -1,7 +1,7 @@
-import EuclideanDistance from './distances/euclidean_dist.js';
-import ManhattanDistance from './distances/manhattan_dist.js';
-import ChebyshevDistance from './distances/chebyshev_dist.js';
-import CosineDistance from "./distances/cosine_dist.js";
+import { EuclideanDistance } from './distances/euclidean_dist.js';
+import { ManhattanDistance } from './distances/manhattan_dist.js';
+import { ChebyshevDistance } from './distances/chebyshev_dist.js';
+import { CosineDistance } from './distances/cosine_dist.js';
 
 // To add a new distance metric add a line adding it to the window object
 // Add the metric object to distance_metric_objs
@@ -9,10 +9,9 @@ import CosineDistance from "./distances/cosine_dist.js";
 window.EuclideanDistance = EuclideanDistance;
 window.ManhattanDistance = ManhattanDistance;
 window.ChebyshevDistance = ChebyshevDistance;
-window.CosineDistance = CosineDistance
+window.CosineDistance = CosineDistance;
 
-
-const distance_metric_objs = [
+const distanceMetricObjs = [
   EuclideanDistance,
   ManhattanDistance,
   ChebyshevDistance,
@@ -20,8 +19,8 @@ const distance_metric_objs = [
 ];
 
 // canvas dimensions
-const canvas_w = 640;
-const canvas_h = 480;
+const canvasW = 640;
+const canvasH = 480;
 
 // Points to measure distances between
 let p1 = null;
@@ -29,13 +28,13 @@ let p2 = null;
 let p3 = null;
 
 // Will hold the selected DistanceMetric object
-let distance_metric;
+let distanceMetric;
 
 // Will be a key-value store to look up selected DistanceMetric object
-const distance_metrics = {};
+const distanceMetrics = {};
 
 // Will be a dropdown holding DistanceMetric.dist_name static attributes
-let distance_selector;
+let distanceSelector;
 
 // Constrain coordintates to canvas and shift so (0, 0) is middle of canvas
 function mouseXY() {
@@ -46,16 +45,15 @@ function mouseXY() {
 }
 
 // Set p2 to mouse location when user clicks
-function mouseClicked() {
+window.mouseClicked = () => {
   if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
     p2 = mouseXY();
   }
-}
-window.mouseClicked = mouseClicked;
+};
 
 // Set p3 to mouse location when user presses ENTER
 // Set p3 to null when user presses ESCAPE
-function keyPressed() {
+window.keyPressed = () => {
   if (keyCode === ENTER) {
     if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
       p3 = mouseXY();
@@ -63,51 +61,45 @@ function keyPressed() {
   } else if (keyCode === ESCAPE) {
     p3 = null;
   }
-}
-window.keyPressed = keyPressed;
+};
 
 // Change distance metric based on user dropdown selection
-function update_dist_metric() {
-  const dist_name = distance_selector.value();
-  const dm = distance_metrics[dist_name];
+function updateDistMetric() {
+  const distName = distanceSelector.value();
+  const dm = distanceMetrics[distName];
 
-  distance_metric = new window[dm](p1, p2, p3);
+  distanceMetric = new window[dm](p1, p2, p3);
 }
 
 // Initialize:
 // * Canvas
 // * distance method drop down list
 // * distance metric key-value store
-function setup() {
-  distance_selector = createSelect();
-  distance_selector.changed(update_dist_metric);
-  distance_selector.parent('#distance-selector');
+window.setup = () => {
+  distanceSelector = createSelect();
+  distanceSelector.changed(updateDistMetric);
+  distanceSelector.parent('#distance-selector');
 
-  const cnv = createCanvas(canvas_w, canvas_h);
+  const cnv = createCanvas(canvasW, canvasH);
   cnv.parent('#num-distance-plot');
 
-  let first_name = null;
-  for (const dm of distance_metric_objs) {
-    distance_metrics[dm.dist_name] = dm.name;
-    distance_selector.option(dm.dist_name);
+  distanceMetricObjs.forEach((dm) => {
+    distanceMetrics[dm.distName] = dm.name;
+    distanceSelector.option(dm.distName);
+  });
 
-    if (!first_name) {
-      first_name = dm.dist_name;
-    }
-  }
-
-  distance_selector.selected(first_name);
-  update_dist_metric();
+  const firstName = distanceMetricObjs[0].distName;
+  distanceSelector.selected(firstName);
+  updateDistMetric();
 
   // shift canvas down by 10
   cnv.position(cnv.position().x, cnv.position().y + 10);
-}
-window.setup = setup;
+};
 
 // Draw:
 // * Axes
 // * Whatever draw method implented by selected DistanceMetric
-function draw() {
+window.draw = () => {
   background(255);
 
   // Draw canvas border
@@ -131,14 +123,13 @@ function draw() {
   // x is set by mouseClicked()
   // z is set by keyPressed()
   p1 = mouseXY();
-  distance_metric.p1 = p1;
+  distanceMetric.p1 = p1;
 
   if (p2) {
-    // Case when `p3 == null` is handled inside DistanceMetric
-    distance_metric.p2 = p2;
-    distance_metric.p3 = p3;
+    // Case when `p3 === null` is handled inside DistanceMetric
+    distanceMetric.p2 = p2;
+    distanceMetric.p3 = p3;
 
-    distance_metric.draw();
+    distanceMetric.draw();
   }
-}
-window.draw = draw;
+};
