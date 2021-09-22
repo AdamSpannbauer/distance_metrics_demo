@@ -1,5 +1,5 @@
 import { chebyshevDist } from './baseDistFuncs.js';
-import { DistanceMetric } from './distance_metric.js';
+import { DistanceMetric } from './distanceMetric.js';
 import { midPointText } from './utils.js';
 
 export class ChebyshevDistance extends DistanceMetric {

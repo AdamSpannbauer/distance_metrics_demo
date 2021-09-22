@@ -1,23 +1,18 @@
-import { DistanceMetric } from './distance_metric.js';
+import { DistanceMetric } from './distanceMetric.js';
 import { midPointText } from './utils.js';
 
-export class ManhattanDistance extends DistanceMetric {
-  static distName = 'Manhattan';
+export class EuclideanDistance extends DistanceMetric {
+  static distName = 'Euclidean';
 
   distance(p1, p2) {
-    const dx = abs(p1.x - p2.x);
-    const dy = abs(p1.y - p2.y);
-
-    return dx + dy;
+    return dist(p1.x, p1.y, p2.x, p2.y);
   }
 
   drawPair(p1, p2, d, p1Fill, p2Fill, strokeColor) {
     push();
     strokeColor.setAlpha(150);
     stroke(strokeColor);
-
-    line(p1.x, p1.y, p2.x, p1.y);
-    line(p2.x, p1.y, p2.x, p2.y);
+    line(p1.x, p1.y, p2.x, p2.y);
 
     noStroke();
     fill(p1Fill);
@@ -26,6 +21,7 @@ export class ManhattanDistance extends DistanceMetric {
     fill(p2Fill);
     ellipse(p2.x, p2.y, 10, 10);
 
+    // place text showing distance at midploint
     midPointText(p1, p2, d.toFixed(1), strokeColor);
     pop();
   }

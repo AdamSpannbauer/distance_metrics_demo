@@ -1,7 +1,7 @@
-import { EuclideanDistance } from './distances/euclidean_dist.js';
-import { ManhattanDistance } from './distances/manhattan_dist.js';
-import { ChebyshevDistance } from './distances/chebyshev_dist.js';
-import { CosineDistance } from './distances/cosine_dist.js';
+import { EuclideanDistance } from './distances/euclideanDist.js';
+import { ManhattanDistance } from './distances/manhattanDist.js';
+import { ChebyshevDistance } from './distances/chebyshevDist.js';
+import { CosineDistance } from './distances/cosineDist.js';
 
 // To add a new distance metric add a line adding it to the window object
 // Add the metric object to distance_metric_objs

@@ -1,5 +1,5 @@
 import { cosineDist } from './baseDistFuncs.js';
-import { DistanceMetric } from './distance_metric.js';
+import { DistanceMetric } from './distanceMetric.js';
 
 export class CosineDistance extends DistanceMetric {
   static distName = '1 - Cosine Similarity';
