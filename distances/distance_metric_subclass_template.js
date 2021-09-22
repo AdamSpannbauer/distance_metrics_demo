@@ -1,8 +1,9 @@
 import DistanceMetric from './distance_metric.js';
+import { midPointText } from './utils.js';
 
-class MyDistanceMetric extends DistanceMetric {
+export class MyDistanceMetric extends DistanceMetric {
   // TODO: set this name to a user facing text
-  static dist_name = 'My Distance Metric';
+  static distName = 'My Distance Metric';
 
   distance(p1, p2) {
     // TODO: implement distance calc here
@@ -10,33 +11,31 @@ class MyDistanceMetric extends DistanceMetric {
 
     // example using p5js builtin dist function:
     return dist(p1.x, p1.y, p2.x, p2.y);
- 	}
+  }
 
-  draw_pair (p1, p2, d, p1_fill, p2_fill, l_stroke) {
+  drawPair(p1, p2, d, p1Fill, p2Fill, strokeColor) {
     // TODO: implement code to draw a pair of points/vectors
     // given 2 2d vectors (each with x & y properties)
 
     // example drawing 2 points
     push();
     // transparency in case of overlapping lines
-    l_stroke.setAlpha(150);
+    strokeColor.setAlpha(150);
     // line color
-    stroke(l_stroke);
+    stroke(strokeColor);
     // draw line between pts
     line(p1.x, p1.y, p2.x, p2.y);
 
     // no outline for points and use given color for each
     noStroke();
-    fill(p1_fill);
+    fill(p1Fill);
     ellipse(p1.x, p1.y, 10, 10);
 
-    fill(p2_fill);
+    fill(p2Fill);
     ellipse(p2.x, p2.y, 10, 10);
 
     // place text showing distance at midploint of line
-    super.mid_point_text(p1, p2, d.toFixed(1), l_stroke);
+    midPointText(p1, p2, d.toFixed(1), strokeColor);
     pop();
   }
 }
-
-export default MyDistanceMetric;

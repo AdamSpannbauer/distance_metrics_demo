@@ -4,7 +4,8 @@
         "es6": true
     },
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "p5js"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,6 +17,8 @@
         "sourceType": "module"
     },
     "rules": {
-
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off"
     }
 }
