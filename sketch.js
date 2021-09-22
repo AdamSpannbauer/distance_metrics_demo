@@ -93,7 +93,7 @@ window.setup = () => {
   updateDistMetric();
 
   // shift canvas down by 10
-  cnv.position(cnv.position().x, cnv.position().y + 10);
+  cnv.position(cnv.position().x, cnv.position().y + 20);
 };
 
 // Draw:
